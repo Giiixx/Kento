@@ -1,0 +1,145 @@
+<html >
+
+    <head th:replace="Layous/Fragmentos::cabecera"> 
+     <meta charset="utf-8"/></head>
+    <body class="sb-nav-fixed">
+    <header th:replace="Layous/Fragmentos::barraSuperior"></header>
+      
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav" th:replace="Layous/Fragmentos::menu">
+                
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container  px-4 py-4">
+                    
+              <div class="card">
+              <div class="card-header bg-secondary text-white">Platos Registrados</div> 
+              <div class="card-body">
+              <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+              <thead class="thead-dark">
+              <tr>
+              	<th>#</th>
+              	<th>Categoria</th>
+              	<th>Nombre</th>
+              	<th>Tipo de Moneda</th>
+              	<th>Precio</th>
+              	<th>Fecha de Registro</th>
+              	<th></th>
+              	<th></th>
+              	</tr>
+              </thead>
+              
+              <tbody>
+              <tr th:each="item:${listaPlatos}">
+              		<td th:text="${item.id}"></td>
+              		<td th:text="${item.categoria.nombre}"></td>
+              		<td th:text="${item.nombre}"></td>
+              		<td th:text="${item.moneda}"></td>
+              		<td th:text="${item.precio}"></td>
+              		<td th:text="${item.fecha_registro}"></td>
+              	<th class="text-center">
+              	<a href="#" th:id="${item.id}" th:param1="${item.categoria.id}" th:param2="${item.nombre}" th:param3="${item.moneda}" 
+              	th:param4="${item.precio}" 
+              	class="btn btn-warning editarPlato" data-toggle ="modal" data-target="#modalPlato">
+              	<i class ="fas fa-edit"></i> Editar
+              
+              </a>
+              </th>
+              
+              <th class="text-center">
+              <a th:href="@{/plato/eliminar/}+${item.id}" class="btn btn-danger" onclick="return confirm('Deseas eliminar?')">
+              <i class=" far fa-trash-alt"></i> Eliminar
+              </a>
+              </th>
+              
+              </tr>
+              </tbody>
+              
+              </table>
+           </div>
+          </div>
+          <div class="row mt-5">
+          <div class="col-12">
+          <button type = "button" class="btn btn-success" data-toggle ="modal" data-target="#modalPlato">
+          <i class="far fa-save"></i> Registrar Nuevo Producto
+          </button>
+          </div>
+          </div>
+          </div>
+         </main>
+<footer class="py-4 bg-light mt-auto" th:replace="Layous/Fragmentos::footer">
+  </footer>
+ </div>
+</div>
+        
+             
+ <!-- Modal -->
+<div class="modal fade" id="modalPlato" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Datos de platillos</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&time;</span>
+        </button>
+      </div>
+      
+      <form th:action="@{/plato/form}" th:object="${plato}" method="post">
+      <input type="hidden" th:field="*{id}"/>
+      
+      <div class="modal-body">
+      <div class="row mb-3">
+      <div class="col-12">
+      <label>Categoria </label>
+      <select class="form-select" th:field="*{categoria.id}" name="categoria.id">
+      <option value =""> Seleccione una opcion </option>
+      <option th:each="item:${listaCategorias}" th:value="${item.id}" th:text="${item.nombre}">
+      </option>
+      </select>
+      </div>
+      </div>
+   
+      
+      <div class="row mb-3">
+      <div class="col-12">
+      <Label>Nombre:</Label>
+      <input type="text" class="form-control" th:field="*{nombre}"/>
+      
+      </div>
+      </div>
+      
+      <div class="row mb-3">
+      <div class="col-12">
+      <Label>Tipo de Moneda:</Label>
+      <input type="text" class="form-control" th:field="*{moneda}"/>
+      </div>
+      </div>
+      
+      
+       <div class="row mb-3">
+      <div class="col-12">
+      <Label>Precio del platillo:</Label>
+      <input type="text" class="form-control"  th:field="*{precio}"/>
+      
+      </div>
+    </div>
+  </div> 
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fas fa-ban"></i> Cancelar</button>
+        <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Guardar Cambios</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>  
+        
+        
+        <script type="text/javascript"  th:src="@{/js/jquery-3.5.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+  		<script type="text/javascript" th:src="@{/js/plato.js}"></script>
+    </body>
+</html>

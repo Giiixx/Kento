@@ -1,0 +1,144 @@
+<html >
+
+    <head th:replace="Layous/Fragmentos::cabecera"> 
+     <meta charset="utf-8"/></head>
+    <body class="sb-nav-fixed">
+    <header th:replace="Layous/Fragmentos::barraSuperior"></header>
+      
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav" th:replace="Layous/Fragmentos::menu">
+                
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container  px-4 py-4">
+                    
+                    <form th:action="@{/categoria/form}" th:object="${categoria}" method="post">          
+                    <div class="card">
+                    <div class="card-header bg-info"><i class="fas fa-book-open"></i> Datos de Categoria </div>
+                    <div class="card-body">
+                    <div class="row">
+                    	<div class="col-md-6 mb-3">
+                    	<label> Nombre:</label><input th:field="*{nombre}" type="text" class="form-control" placeholder="Ingrese nombre"/>
+                    	</div>
+                    
+                    	<div class="col-md-6 mb-3">
+                    	<label> Descripción:</label><input th:field="*{descripcion}" type="text" class="form-control" placeholder="Ingrese Descripción"/>
+                    	</div>
+                    
+                    </div>
+                    
+                    
+                    <div class="row mt-5">
+                    <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-dark"><i class="fas fa-save"> Guardar Categoria</i></button>
+                    </div>
+                    </div>
+                  </div>
+               </div>
+              </form>
+              
+              <br>
+              <div class="card">
+              <div class="card-header bg-secondary text-white">Categoria Registradas</div> 
+              <div class="card-body">
+              <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+              <thead class="thead-dark">
+              <tr>
+              	<th>#</th>
+              	<th>Nombre</th>
+              	<th>Descripción</th>
+              	<th></th>
+              	<th></th>
+              	</tr>
+              </thead>
+              
+              <tbody>
+              <tr th:each="item:${listaCategorias}">
+              		<td th:text="${item.id}"></td>
+              		<td th:text="${item.nombre}"></td>
+              		<td th:text="${item.descripcion}"></td>
+              	<th class="text-center">
+              	<a href="#" th:id="${item.id}" th:param1="${item.nombre}" th:param2="${item.descripcion}"
+              	class="btn btn-warning editarCategoria" data-toggle ="modal" data-target="#editModal">
+              	<i class ="fas fa-edit"></i> Editar
+              
+              </a>
+              </th>
+              
+              <th class="text-center">
+              <a th:href="@{/categoria/eliminar/}+${item.id}" class="btn btn-danger" onclick="return confirm('Deseas eliminar?')">
+              <i class=" far fa-trash-alt"></i>Eliminar
+              </a>
+              </th>
+              
+              </tr>
+              </tbody>
+              
+              </table>
+           </div>
+          </div>
+        </div>
+    </div>
+  </main>
+<footer class="py-4 bg-light mt-auto" th:replace="Layous/Fragmentos::footer">
+  </footer>
+ </div>
+</div>
+        
+  
+   
+ <!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&time;</span>
+        </button>
+      </div>
+      
+      <form th:action="@{/categoria/form}" th:object="${categoria}" method="post">
+      <input type="hidden" th:field="*{id}"/>
+      
+      <div class="modal-body">
+      
+      <div class="form-row mb-3">
+      <div class="col-12">
+      <Label>Nombre:</Label>
+      <input type="text" class="form-control" id="txtNombre" name="nombre"/>
+      
+      </div>
+      </div>
+      
+      
+       <div class="form-row mb-3">
+      <div class="col-12">
+      <Label>Descripción:</Label>
+      <input type="text" class="form-control" id="txtDescripcion" name="descripcion"/>
+      
+      </div>
+      </div>
+        </div>
+    
+      
+  
+     
+    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fas fa-ban"></i> Cancelar</button>
+        <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>  
+        
+        
+        <script type="text/javascript"  th:src="@{/js/jquery-3.5.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+  		<script type="text/javascript" th:src="@{/js/categoria.js}"></script>
+    </body>
+</html>

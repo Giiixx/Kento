@@ -1,0 +1,64 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Autentificación de Usuarios</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/all.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/estilo.css}">
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.mins}"></script>
+</head>
+<body>
+	<div class="container">
+	
+	
+		<div class="alert alert-danger alert-dismissible fade show"
+			role="alert" th:if="${error != null}">
+			<strong>ERROR!</strong> <span th:text="${error}"></span>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	
+		<div class="cuadro">
+			<h2 class="pt-4 text-light">
+				INGRESA
+			</h2>
+			<img src="images/sushi.png" width="250">
+			
+			<form th:action="@{/}" method="post">
+			
+			<form class="needs-validation" novalidate method="GET" action="index.html">
+				<div class="row margen">
+				<div class="col-12 mb-3">
+					<input type="text" name="username" id="username" class="form-control" placeholder="Ingrese usuario" required minlength="4" autocomplete="username" autofocus pattern="[a-zA-Z0-9]*">
+					<div class="invalid-feedback">El usuario debe contener como mínimo 4 caracteres (letras y/o números)</div>
+				</div>
+			</div>
+			<div class="row margen" >
+				<div class="col-12">
+						<input type="password" name="password" id="password" class="form-control" placeholder="Ingrese contraseña" minlength="6" autocomplete="new-password" required>
+					<div class="invalid-feedback">La contraseña debe contener como mínimo 6 caracteres</div>
+					
+				</div>
+			</div>
+			<div class="row ">
+				<div class="col-12">
+					<a href="index.html">
+						<!--<a class ="btn btn-primary colorbotn" th:href="@{/principal/}"><i class="fas fa-user-lock"></i> Iniciar Sesión</a>-->
+						<button type="submit" class ="btn btn-primary colorbotn"><i class="fas fa-user-lock"></i> Iniciar Sesión</button>
+					</a>
+				</div>
+			</div>
+			</form>
+			
+			</form>
+			
+			<br>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/validation.js}"></script>
+</body>
+</html>
