@@ -78,4 +78,5 @@ INSERT INTO roles Values(1,'ROLE_ADMIN');
 INSERT INTO roles Values(1,'ROLE_USER');
 INSERT INTO roles Values(2,'ROLE_USER');
 */
+	/*asdsasdsadsa*/
 }
