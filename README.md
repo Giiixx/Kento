@@ -1,2 +1,0 @@
-# Kento
-Trabajo U
