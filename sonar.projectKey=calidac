@@ -1,1 +1,4 @@
-
+sonar.projectKey=Kendo
+sonar.projectName=Kendo
+sonar.projectVersion=0.1
+sonar.sources=src/
